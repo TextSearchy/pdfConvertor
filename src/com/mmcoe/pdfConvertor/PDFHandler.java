@@ -9,7 +9,7 @@ public class PDFHandler {
 	public static void main(String[] args) throws IOException {
 		Convertor C = new Convertor();
 		C.setFilePath(args[0]);
-		System.out.println(C.ToText());
+		C.fileWriter(args[1], C);
 	}
 
 }

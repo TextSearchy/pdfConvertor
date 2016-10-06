@@ -47,7 +47,11 @@ public class Convertor {
 		// pdfStripper.setEndPage(pdDoc.getNumberOfPages());
 
 		Text = pdfStripper.getText(pdDoc);
+		if(Text.startsWith("<?php")) {
+			return null;
+		} else {
 		return Text;
+		}
 	}
 
 	public void setFilePath(String string) {
@@ -65,7 +69,13 @@ public class Convertor {
 			// Use FileWriter For now
 			FileWriter out = new FileWriter(path);
 			BufferedWriter buffer = new BufferedWriter(out);
-			buffer.write(pdfText.ToText());
+			String convertedText = pdfText.ToText();
+			if(convertedText==null) {
+				System.out.println("Cannot Convert, mal-pdf file recieved: Error: -2");
+				System.exit(-2);
+			} else {
+			buffer.write(convertedText);
+			}
 			// Close This Shit
 			buffer.close();
 

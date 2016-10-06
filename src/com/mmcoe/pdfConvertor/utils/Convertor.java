@@ -24,8 +24,12 @@ public class Convertor {
 		this.pdfStripper = null;
 		this.pdDoc = null;
 		this.cosDoc = null;
-
+		if(filePath!=null) {
 		file = new File(filePath);
+		} else {
+			System.out.println("Cannot Convert, invalid pdf file recieved: Error: -1");
+			System.exit(-1);
+		}
 		parser = new PDFParser(new RandomAccessFile(file, "r")); // update for
 																	// PDFBox V
 																	// 2.0
@@ -48,8 +52,12 @@ public class Convertor {
 
 	public void setFilePath(String string) {
 		// TODO Auto-generated method stub
-		System.out.println("Converting file: " + string);
-		this.filePath = string;
+		if(string.contains(".pdf")) {
+			System.out.println("Converting file: " + string);
+			this.filePath = string;	
+		} else {
+			this.filePath = null;
+		}
 	}
 
 	public void fileWriter(String path, Convertor pdfText) {
